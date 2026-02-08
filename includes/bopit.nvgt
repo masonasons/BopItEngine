@@ -1,0 +1,209 @@
+class command
+{
+string name;
+int key;
+command(string name, int key)
+{
+this.name=name;
+this.key=key;
+}
+}
+class bopit
+{
+bool beatbop=false;
+bool power=false;
+bool passit=false;
+int pass=0;
+int timeout;
+int default_timeout;
+int mode=0;
+int score=0;
+int high_score=0;
+bool playing_sound=false;
+bool in_game=false;
+int[] speeds;
+int speed_index=0;
+int speedup=0;
+int speed_interval;
+beat@ b;
+int max_score=100;
+string soundpath;
+dictionary sounds;
+command@[] commands;
+command@ current_command;
+timer waittimer;
+bopit()
+{
+@b=beat(@this);
+}
+void loop()
+{
+b.loop();
+sound_loop();
+if (in_game==false)
+wait_loop();
+else
+game_loop();
+}
+void game_loop()
+{
+if (!b.playing and @current_command==null)
+{
+new_command();
+play_command();
+if (command_loop())
+{
+if (passit==false)
+score++;
+b.stop();
+b.play(current_command.name+"bcommand");
+@current_command=null;
+speedup++;
+if (passit)
+pass++;
+if (pass>=random(5,15))
+{
+pass=0;
+while (b.playing)
+{
+wait(5);
+b.loop();
+}
+b.play("passit");
+while (b.playing)
+{
+wait(5);
+b.loop();
+}
+b.play("start");
+}
+if (speedup>=speed_interval)
+{
+speedup=0;
+if (speed_index<speeds.length()-1)
+{
+speed_index++;
+timeout-=40;
+}
+}
+}
+else
+{
+@current_command=null;
+lose();
+in_game=false;
+}
+}
+}
+void wait_loop()
+{
+}
+void sound_loop()
+{
+bool playing=false;
+for (uint i=0; i<sounds.get_size(); i++)
+{
+sound@ h;
+if (!sounds.get(sounds.get_keys()[i],@h))
+continue;
+if (h.playing)
+playing=true;
+}
+if (!playing)
+playing_sound=false;
+}
+void stop_sounds()
+{
+for (uint i=0; i<sounds.get_size(); i++)
+{
+sound@ h;
+if (!sounds.get(sounds.get_keys()[i],@h))
+continue;
+h.stop();
+}
+}
+bool command_loop()
+{
+waittimer.restart();
+while(waittimer.elapsed<=timeout)
+{
+wait(5);
+sound_loop();
+b.loop();
+if (b.playing or playing_sound)
+waittimer.restart();
+for (uint i=0; i<commands.length(); i++)
+{
+if (key_pressed(commands[i].key))
+{
+if (@current_command==@commands[i])
+return true;
+else
+return false;
+}
+}
+}
+return false;
+}
+void add_sound(string soundname)
+{
+sound s;
+s.load(soundpath+"/"+soundname+".flac");
+sounds[soundname]=@s;
+}
+void add_sounds(string[] snds)
+{
+for (uint i=0; i<snds.length(); i++)
+add_sound(snds[i]);
+}
+void add_command(command@ command)
+{
+commands.insert_last(@command);
+}
+void play(string name, bool wait=true, bool stop=true, bool hard_wait=false)
+{
+if (stop)
+stop_sounds();
+sound@ h;
+if (sounds.get(name, @h))
+{
+h.seek(0);
+if (!hard_wait)
+h.play();
+else
+h.play_wait();
+if (wait)
+playing_sound=true;
+}
+}
+void play_command()
+{
+b.play(current_command.name+(beatbop==true?"c":"")+"command");
+}
+void start_game()
+{
+b.play("start");
+if (passit==false)
+score=0;
+in_game=true;
+}
+void new_command()
+{
+@current_command=@commands[random(0,commands.length()-1)];
+}
+int get_speed() property
+{
+return speeds[speed_index];
+}
+void lose()
+{
+timeout=default_timeout;
+speedup=0;
+speed_index=0;
+pass=0;
+b.stop();
+}
+void play_score()
+{
+}
+}

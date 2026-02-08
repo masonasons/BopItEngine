@@ -1,0 +1,122 @@
+class beat_segment
+{
+int offset;
+int time;
+sound@ handle;
+bool wait=true;
+beat_segment(sound@ h, int time, int offset=0, bool wait=true)
+{
+@this.handle=@h;
+this.time=time;
+this.offset=offset;
+this.wait=wait;
+}
+}
+class beat
+{
+bopit@ bop;
+bool playing=false;
+dictionary beats;
+dictionary sounds;
+beat_segment@[] segments;
+int index=0;
+timer time;
+beat(bopit@ bop)
+{
+@this.bop=@bop;
+}
+void add(string name, string pattern)
+{
+this.beats[name]=pattern;
+}
+void loop()
+{
+if (playing)
+{
+if (bop.playing_sound)
+return;
+if (index==-1)
+{
+time.restart();
+index=0;
+play_segment();
+return;
+}
+if (index>-1)
+{
+if (time.elapsed>=(bop.speed*segments[index].time)+segments[index].offset and (segments[index].wait==false or segments[index].wait==true and !segments[index].handle.playing))
+{
+index++;
+if (index>=segments.length())
+{
+playing=false;
+return;
+}
+play_segment();
+}
+}
+}
+}
+void play_segment()
+{
+segments[index].handle.seek(0);
+segments[index].handle.play();
+time.restart();
+}
+bool play(string name)
+{
+segments.resize(0);
+if (beats.exists(name))
+{
+string b;
+beats.get(name,b);
+string[] data=b.split("\r\n",false);
+for (uint i=0; i<data.length(); i++)
+{
+string[] data2=data[i].split(":",true);
+sound@ h;
+if (!sounds.get(data2[0],@h))
+continue;
+if (data2.length()==2)
+add_segment(beat_segment(@h,parse_int(data2[1]),0,true));
+else if (data2.length()==3)
+add_segment(beat_segment(@h,parse_int(data2[1]),parse_int(data2[2]),true));
+else if (data2.length()==4)
+add_segment(beat_segment(@h,parse_int(data2[1]),parse_int(data2[2]),data[2]=="true"?true:false));
+}
+this.index=-1;
+this.playing=true;
+return true;
+}
+else
+return false;
+return false;
+}
+void add_segment(beat_segment@ s)
+{
+segments.insert_last(s);
+}
+void add_sounds(string[] snds)
+{
+for (uint i=0; i<snds.length(); i++)
+add_sound(snds[i]);
+}
+void stop()
+{
+for (uint i=0; i<sounds.get_size(); i++)
+{
+sound@ h;
+if (!sounds.get(sounds.get_keys()[i],@h))
+continue;
+h.stop();
+}
+segments.resize(0);
+playing=false;
+}
+void add_sound(string soundname)
+{
+sound s;
+s.load(bop.soundpath+"/"+soundname+".flac");
+sounds[soundname]=@s;
+}
+}

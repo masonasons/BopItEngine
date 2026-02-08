@@ -1,0 +1,143 @@
+class bopit_original:bopit
+{
+bopit_original()
+{
+soundpath="sounds/original";
+bopit();
+speeds={103,97,92, 87, 82};
+speed_interval=7;
+default_timeout=300;
+timeout=300;
+add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "losesolo", "ouch", "passit", "tone1", "tone2", "tone3", "tone4", "win"});
+b.add_sounds({"1", "2", "3", "1b", "2b", "3b", "1c", "2c", "3c", "drumkick", "drumkick2", "drumsnare", "passit", "tone1", "tone2", "tone3", "tone4"});
+add_beats();
+add_command(command(1,KEY_DOWN));
+add_command(command(2,KEY_LEFT));
+add_command(command(3,KEY_RIGHT));
+}
+void add_beats()
+{
+b.add("start","drumkick:4
+drumsnare:4
+drumkick:2
+drumkick:2
+drumsnare:2
+drumkick2:2");
+b.add("1command","1:4
+drumsnare:2
+drumkick2:2");
+b.add("1bcommand","1b:4
+drumsnare:2
+drumkick2:2");
+b.add("1ccommand","1c:4
+drumsnare:2
+drumkick2:2");
+b.add("2command","2:4
+drumsnare:2
+drumkick2:2");
+b.add("2bcommand","2b:4
+drumsnare:2
+drumkick2:2");
+b.add("2ccommand","2c:4
+drumsnare:2
+drumkick2:2");
+b.add("3command","3:4
+drumsnare:2
+drumkick2:2");
+b.add("3bcommand","3b:4
+drumsnare:2
+drumkick2:2");
+b.add("3ccommand","3c:4
+drumsnare:2
+drumkick2:2");
+b.add("passit","passit:4
+tone1:2
+tone2:2
+tone3:2
+tone2:2
+tone1:2
+tone4:2");
+}
+void wait_loop()
+{
+bopit::wait_loop();
+for (uint i=0; i<commands.length(); i++)
+{
+if (commands[i].name==2 and key_pressed(commands[i].key))
+{
+if (!power)
+{
+power=true;
+mode=3;
+}
+mode++;
+if (mode>3)
+mode=1;
+if (mode==1)
+{
+beatbop=false;
+passit=true;
+play("1b");
+}
+else if (mode==2)
+{
+beatbop=true;
+passit=true;
+play("3b");
+}
+else if (mode==3)
+{
+beatbop=false;
+passit=false;
+play("2b");
+}
+wait(260);
+}
+if (commands[i].name==3 and key_pressed(commands[i].key) and power and mode==3)
+{
+play_score();
+}
+if (commands[i].name==1 and key_pressed(commands[i].key) and power)
+{
+start_game();
+return;
+}
+}
+}
+void lose()
+{
+bopit::lose();
+play("ouch",hard_wait=true);
+if (mode==3)
+{
+play("losesolo",hard_wait=true);
+wait(500);
+play_score();
+}
+}
+void play_score()
+{
+int hundreds=floor(score/100);
+int tens=floor(score/10);
+if (tens>=20)
+tens-=20;
+if (tens>=10)
+tens-=10;
+int ones=score-(hundreds*100)-(tens*10);
+for (uint i=1; i<=hundreds; i++)
+{
+play("2b");
+wait(550);
+}
+for (uint i=1; i<=tens; i++)
+{
+play("3b");
+wait(550);
+}
+for (uint i=1; i<=ones; i++)
+{
+play("1c");
+wait(550);
+}
+}
+}

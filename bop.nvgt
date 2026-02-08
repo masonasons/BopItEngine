@@ -1,0 +1,15 @@
+#pragma asset "sounds"
+#include"menu.nvgt"
+#include"includes/*.nvgt"
+void main()
+{
+show_window("Bop It");
+bopit_extreme b;
+while(true)
+{
+wait(5);
+b.loop();
+if (key_pressed(KEY_ESCAPE))
+exit();
+}
+}

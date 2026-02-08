@@ -1,0 +1,4 @@
+[build]
+output_basename=BopItEngine
+[scripting]
+allow_multiline_strings = true
