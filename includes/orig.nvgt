@@ -2,8 +2,8 @@ class bopit_original:bopit
 {
 bopit_original(string name)
 {
-soundpath="sounds/original";
 super(name);
+soundpath="sounds/original";
 speeds={103,97,92, 87, 82};
 speed_interval=7;
 default_timeout=300;
