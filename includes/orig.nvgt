@@ -91,7 +91,7 @@ beatbop=false;
 passit=false;
 play("2b");
 }
-wait(260);
+wait(260/pitchmod);
 }
 if (commands[i].name==3 and key_pressed(commands[i].key) and power and mode==3)
 {
@@ -111,7 +111,7 @@ play("ouch",hard_wait=true);
 if (mode==3)
 {
 play("losesolo",hard_wait=true);
-wait(500);
+wait(500/pitchmod);
 play_score();
 }
 }
@@ -127,17 +127,17 @@ int ones=score-(hundreds*100)-(tens*10);
 for (uint i=1; i<=hundreds; i++)
 {
 play("2b");
-wait(550);
+wait(550/pitchmod);
 }
 for (uint i=1; i<=tens; i++)
 {
 play("3b");
-wait(550);
+wait(550/pitchmod);
 }
 for (uint i=1; i<=ones; i++)
 {
 play("1c");
-wait(550);
+wait(550/pitchmod);
 }
 }
 }

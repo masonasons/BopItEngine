@@ -137,7 +137,7 @@ play("solo",hard_wait=true);
 if (commands[i].name==3 and key_pressed(commands[i].key) and power and mode==3)
 {
 play("hsv",hard_wait=true);
-wait(150);
+wait(150/pitchmod);
 play_score(highscore);
 }
 if (commands[i].name==1 and key_pressed(commands[i].key) and power)
@@ -160,10 +160,10 @@ if ((mode==3 or mode==4) and score<150)
 {
 if(score>highscore) {
 play("hs",hard_wait=true);
-wait(50);
+wait(50/pitchmod);
 }
 play("losesolo",hard_wait=true);
-wait(50);
+wait(50/pitchmod);
 }
 if((mode==3 or mode==4) and score>0) {
 if(score>highscore) {
@@ -192,17 +192,17 @@ int ones=value-(hundreds*100)-(tens*10);
 for (uint i=1; i<=hundreds; i++)
 {
 play("2b");
-wait(550);
+wait(550/pitchmod);
 }
 for (uint i=1; i<=tens; i++)
 {
 play("3b");
-wait(550);
+wait(550/pitchmod);
 }
 for (uint i=1; i<=ones; i++)
 {
 play("1b");
-wait(700);
+wait(700/pitchmod);
 }
 }
 }

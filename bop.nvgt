@@ -1,3 +1,4 @@
+#include"speech.nvgt"
 #pragma asset "sounds"
 #include"menu.nvgt"
 #include"includes/*.nvgt"

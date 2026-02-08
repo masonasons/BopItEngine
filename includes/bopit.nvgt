@@ -10,6 +10,7 @@ this.key=key;
 }
 class bopit
 {
+double pitchmod=1.00;
 bool save;
 string name;
 bool beatbop=false;
@@ -58,6 +59,16 @@ if (in_game==false)
 wait_loop();
 else
 game_loop();
+if (key_repeating(KEY_DASH))
+{
+pitchmod-=0.01;
+speak(round(100*pitchmod,0));
+}
+if (key_repeating(KEY_EQUALS))
+{
+pitchmod+=0.01;
+speak(round(100*pitchmod,0));
+}
 }
 void game_loop()
 {
@@ -139,7 +150,7 @@ h.stop();
 bool command_loop()
 {
 waittimer.restart();
-while(waittimer.elapsed<=timeout)
+while(waittimer.elapsed<=timeout/pitchmod)
 {
 wait(5);
 sound_loop();
@@ -181,6 +192,7 @@ stop_sounds();
 sound@ h;
 if (sounds.get(name, @h))
 {
+h.pitch=100*pitchmod;
 h.seek(0);
 if (!hard_wait)
 h.play();

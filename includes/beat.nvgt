@@ -44,7 +44,7 @@ return;
 }
 if (index>-1)
 {
-if (time.elapsed>=(bop.speed*segments[index].time)+segments[index].offset and (segments[index].wait==false or segments[index].wait==true and !segments[index].handle.playing))
+if (time.elapsed>=((bop.speed*segments[index].time)+segments[index].offset)/bop.pitchmod and (segments[index].wait==false or segments[index].wait==true and !segments[index].handle.playing))
 {
 index++;
 if (index>=segments.length())
@@ -60,6 +60,7 @@ play_segment();
 void play_segment()
 {
 segments[index].handle.seek(0);
+segments[index].handle.pitch=100*bop.pitchmod;
 segments[index].handle.play();
 time.restart();
 }
