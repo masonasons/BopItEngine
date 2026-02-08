@@ -132,6 +132,8 @@ if (speed_index<speeds.length()-1)
 {
 speed_index++;
 timeout-=40;
+if (timeout<=40)
+timeout=40;
 }
 }
 }
