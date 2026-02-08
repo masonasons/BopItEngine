@@ -6,8 +6,8 @@ super(name);
 soundpath="sounds/original";
 default_timeout=300;
 timeout=300;
-min_pass_interval=4;
-max_pass_interval=10;
+min_pass_interval=2;
+max_pass_interval=7;
 add_sounds();
 add_beats();
 add_commands();
@@ -23,7 +23,7 @@ void set_speeds()
 {
 speeds={103,97,92, 87, 82};
 min_speed_interval=3;
-max_speed_interval=10;
+max_speed_interval=15;
 }
 void add_sounds()
 {
