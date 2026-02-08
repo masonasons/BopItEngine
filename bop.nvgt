@@ -4,7 +4,7 @@
 void main()
 {
 show_window("Bop It");
-bopit_extreme b;
+bopit_extreme b("extreme");
 while(true)
 {
 wait(5);

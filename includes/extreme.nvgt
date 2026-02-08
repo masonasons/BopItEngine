@@ -1,10 +1,11 @@
 class bopit_extreme:bopit
 {
 int highscore=0;
-bopit_extreme()
+bopit_extreme(string name)
 {
+super(name,true);
 soundpath="sounds/extreme";
-bopit();
+highscore=sd["highscore",0];
 speeds={110,101,97, 87, 84};
 speed_interval=25;
 default_timeout=150;
@@ -166,7 +167,10 @@ wait(50);
 }
 if((mode==3 or mode==4) and score>0) {
 if(score>highscore) {
+{
 highscore=score;
+save_value("highscore",highscore);
+}
 play("hsv",hard_wait=true);
 }
 else {

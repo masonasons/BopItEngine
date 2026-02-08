@@ -1,0 +1,92 @@
+#include"bgt_compat.nvgt"
+//savedata class.
+//by Ultrocity Audio
+//Version: 2.0
+class savedata
+{
+//internal variables for the class.
+string key;
+string fn;
+dictionary d;
+//the constructor
+savedata(string filename, string enckey="")
+{
+fn=filename;
+key=enckey;
+}
+//the function to load the saved data into the dictionary.
+void load()
+{
+file f;
+//fn is our previously declared filename string, so use that.
+f.open(fn,"rb");
+//check for a decryption key.
+if (key=="")
+{
+//no key, so just deserialize.
+d=deserialize(f.read());
+}
+else
+{
+//deserialize but first decrypt.
+d=deserialize(string_decrypt(f.read(),key));
+}
+//close the file
+f.close();
+}
+//function to save the data into the file.
+void save()
+{
+file f;
+//again, use the FN string
+f.open(fn,"wb");
+//check for a key.
+if (key=="")
+f.write(serialize(d));
+else
+f.write(string_encrypt(serialize(d),key));
+}
+//function to add a value.
+void add(string name, double value)
+{
+d.set(name,value);
+}
+//function to read a number.
+double opIndex(string name, float def)
+{
+double tmp;
+if (d.exists(name))
+d.get(name,tmp);
+else
+tmp=def;
+return tmp;
+}
+//overloaded function of add to add a string.
+void add(string name, string value)
+{
+d.set(name,value);
+}
+void add(string name, bool value)
+{
+d.set(name,value);
+}
+//function to read a string
+string opIndex(string name, string def)
+{
+string tmp;
+if (d.exists(name))
+d.get(name,tmp);
+else
+tmp=def;
+return tmp;
+}
+bool opIndex(string name, bool def)
+{
+bool tmp;
+if (d.exists(name))
+d.get(name,tmp);
+else
+tmp=def;
+return tmp;
+}
+}

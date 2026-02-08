@@ -10,6 +10,8 @@ this.key=key;
 }
 class bopit
 {
+bool save;
+string name;
 bool beatbop=false;
 bool power=false;
 bool passit=false;
@@ -32,9 +34,21 @@ dictionary sounds;
 command@[] commands;
 command@ current_command;
 timer waittimer;
-bopit()
+savedata@ sd;
+bopit(string name, bool save=false)
 {
+this.save=save;
+this.name=name;
 @b=beat(@this);
+if (save)
+{
+if (OS==OS_DARWIN and !directory_exists(DIRECTORY_APPDATA+"/BopItEngine"))
+directory_create(DIRECTORY_APPDATA+"/BopItEngine");
+if (!directory_exists(OS==OS_DARWIN?DIRECTORY_APPDATA+"/BopItEngine/":""+"config"))
+directory_create(OS==OS_DARWIN?DIRECTORY_APPDATA+"/BopItEngine/":""+"config");
+@sd=savedata(OS==OS_DARWIN?DIRECTORY_APPDATA+"/BopItEngine/":""+"config/"+name+".dat");
+sd.load();
+}
 }
 void loop()
 {
@@ -205,5 +219,19 @@ b.stop();
 }
 void play_score()
 {
+}
+void save_value(string name, int value)
+{
+if (!save)
+return;
+sd.add(name,value);
+sd.save();
+}
+void save_value(string name, string value)
+{
+if (!save)
+return;
+sd.add(name,value);
+sd.save();
 }
 }
