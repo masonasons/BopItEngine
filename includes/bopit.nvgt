@@ -16,6 +16,8 @@ int autopilottime;
 double pitchmod=1.00;
 bool save;
 string name;
+int min_pass_interval=5;
+int max_pass_interval=15;
 bool beatbop=false;
 bool power=false;
 bool passit=false;
@@ -108,22 +110,19 @@ score++;
 b.stop();
 b.play(current_command.name+"bcommand");
 @current_command=null;
+if (score>=max_score)
+{
+win();
+in_game=false;
+}
 if (passit)
 pass++;
-if (pass>=random(5,15))
+if (pass>=random(min_pass_interval,max_pass_interval))
 {
 pass=0;
-while (b.playing)
-{
-wait(5);
-b.loop();
-}
+wait_for_beat();
 b.play("passit");
-while (b.playing)
-{
-wait(5);
-b.loop();
-}
+wait_for_beat();
 b.play("start");
 }
 }
@@ -133,6 +132,14 @@ else
 lose();
 in_game=false;
 }
+}
+}
+void wait_for_beat()
+{
+while (b.playing)
+{
+wait(5);
+b.loop();
 }
 }
 void wait_loop()
@@ -250,6 +257,9 @@ speedup=0;
 speed_index=0;
 pass=0;
 b.stop();
+}
+void win()
+{
 }
 void play_score()
 {

@@ -7,6 +7,7 @@ super(name,true,sounds);
 highscore=sd["highscore",0];
 set_speeds();
 default_timeout=150;
+max_score=250;
 timeout=150;
 add_sounds();
 add_commands();

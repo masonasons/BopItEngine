@@ -127,6 +127,11 @@ wait(500/pitchmod);
 play_score();
 }
 }
+void win()
+{
+wait_for_beat();
+play("win",hard_wait=true);
+}
 void play_score()
 {
 int hundreds=floor(score/100);
