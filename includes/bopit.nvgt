@@ -10,6 +10,9 @@ this.key=key;
 }
 class bopit
 {
+bool autopilot=false;
+int autopilotlevel=1;
+int autopilottime;
 double pitchmod=1.00;
 bool save;
 string name;
@@ -34,7 +37,7 @@ string soundpath;
 dictionary sounds;
 command@[] commands;
 command@ current_command;
-timer waittimer;
+timer autopilottimer, waittimer;
 savedata@ sd;
 bopit(string name, bool save=false)
 {
@@ -59,6 +62,20 @@ if (in_game==false)
 wait_loop();
 else
 game_loop();
+if (key_pressed(KEY_A))
+{
+autopilot=autopilot==true?false:true;
+speak("Autopilot "+(autopilot==true?"on":"off"));
+set_autopilottime();
+}
+if (key_pressed(KEY_S))
+{
+autopilotlevel++;
+if (autopilotlevel>=5)
+autopilotlevel=1;
+set_autopilottime();
+speak("Autopilot Level "+autopilotlevel);
+}
 if (key_pressed(KEY_0))
 {
 pitchmod=1;
@@ -155,6 +172,7 @@ h.stop();
 bool command_loop()
 {
 waittimer.restart();
+autopilottimer.restart();
 while(waittimer.elapsed<=timeout/pitchmod)
 {
 wait(5);
@@ -162,6 +180,12 @@ sound_loop();
 b.loop();
 if (b.playing or playing_sound)
 waittimer.restart();
+if (autopilottimer.elapsed>=autopilottime and autopilot)
+{
+autopilottimer.restart();
+set_autopilottime();
+return true;
+}
 for (uint i=0; i<commands.length(); i++)
 {
 if (key_pressed(commands[i].key))
@@ -250,5 +274,9 @@ if (!save)
 return;
 sd.add(name,value);
 sd.save();
+}
+void set_autopilottime()
+{
+autopilottime=(random(650,800)/autopilotlevel)/pitchmod;
 }
 }
