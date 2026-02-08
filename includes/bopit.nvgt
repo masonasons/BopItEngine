@@ -66,7 +66,7 @@ speak(100);
 }
 if (key_repeating(KEY_DASH))
 {
-pitchmod-=key_down(KEY_LMENU) or key_down(KEY_RMENU)?0.11:0.01;
+pitchmod-=key_down(KEY_LMENU) or key_down(KEY_RMENU)?0.1:0.01;
 speak(round(100*pitchmod,0));
 }
 if (key_repeating(KEY_EQUALS))
