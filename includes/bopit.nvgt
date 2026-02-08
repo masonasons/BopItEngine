@@ -286,7 +286,7 @@ sd.save();
 }
 void set_autopilottime()
 {
-autopilottime=(random(650,800)/autopilotlevel)/pitchmod;
+autopilottime=((speeds[speed_index]+random(-10,10))*8/autopilotlevel)/pitchmod;
 }
 void set_pass_interval()
 {
