@@ -4,16 +4,28 @@ bopit_original(string name)
 {
 super(name);
 soundpath="sounds/original";
-speeds={103,97,92, 87, 82};
-speed_interval=7;
 default_timeout=300;
 timeout=300;
-add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "losesolo", "ouch", "passit", "tone1", "tone2", "tone3", "tone4", "win"});
-b.add_sounds({"1", "2", "3", "1b", "2b", "3b", "1c", "2c", "3c", "drumkick", "drumkick2", "drumsnare", "passit", "tone1", "tone2", "tone3", "tone4"});
+add_sounds();
 add_beats();
+add_commands();
+set_speeds();
+}
+void add_commands()
+{
 add_command(command(1,KEY_DOWN));
 add_command(command(2,KEY_LEFT));
 add_command(command(3,KEY_RIGHT));
+}
+void set_speeds()
+{
+speeds={103,97,92, 87, 82};
+speed_interval=7;
+}
+void add_sounds()
+{
+add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "losesolo", "ouch", "passit", "tone1", "tone2", "tone3", "tone4", "win"});
+b.add_sounds({"1", "2", "3", "1b", "2b", "3b", "1c", "2c", "3c", "drumkick", "drumkick2", "drumsnare", "passit", "tone1", "tone2", "tone3", "tone4"});
 }
 void add_beats()
 {

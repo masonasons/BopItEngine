@@ -39,8 +39,9 @@ command@[] commands;
 command@ current_command;
 timer autopilottimer, waittimer;
 savedata@ sd;
-bopit(string name, bool save=false)
+bopit(string name, bool save=false, string soundpath="")
 {
+this.soundpath=soundpath;
 this.save=save;
 this.name=name;
 @b=beat(@this);
