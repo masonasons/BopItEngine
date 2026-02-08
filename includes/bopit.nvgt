@@ -97,6 +97,8 @@ void game_loop()
 {
 if (!b.playing and @current_command==null)
 {
+if (score>0)
+handle_speedup();
 new_command();
 play_command();
 if (command_loop())
@@ -106,7 +108,6 @@ score++;
 b.stop();
 b.play(current_command.name+"bcommand");
 @current_command=null;
-speedup++;
 if (passit)
 pass++;
 if (pass>=random(5,15))
@@ -124,17 +125,6 @@ wait(5);
 b.loop();
 }
 b.play("start");
-}
-if (speedup>=speed_interval)
-{
-speedup=0;
-if (speed_index<speeds.length()-1)
-{
-speed_index++;
-timeout-=40;
-if (timeout<=40)
-timeout=40;
-}
 }
 }
 else
@@ -281,5 +271,20 @@ sd.save();
 void set_autopilottime()
 {
 autopilottime=(random(650,800)/autopilotlevel)/pitchmod;
+}
+void handle_speedup()
+{
+speedup++;
+if (speedup>=speed_interval)
+{
+speedup=0;
+if (speed_index<speeds.length()-1)
+{
+speed_index++;
+timeout-=40;
+if (timeout<=40)
+timeout=40;
+}
+}
 }
 }
