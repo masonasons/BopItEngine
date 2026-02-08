@@ -9,6 +9,7 @@ void main()
 show_window("Bop It Engine");
 add_bopit(bopit_original("original"));
 add_bopit(bopit_extreme("extreme"));
+add_bopit(bopit_extreme_uk("extreme uk version"));
 bopit@ b=bopits[bopit_index];
 show_window("Bop It Engine: "+b.name);
 while(true)

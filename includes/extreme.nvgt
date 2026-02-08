@@ -134,7 +134,7 @@ play("bb",hard_wait=true);
 play("solo",hard_wait=true);
 }
 }
-if (commands[i].name==3 and key_pressed(commands[i].key) and power and mode==3)
+if (commands[i].name==3 and key_pressed(commands[i].key) and power and (mode==3 or mode==4))
 {
 play("hsv",hard_wait=true);
 wait(150/pitchmod);
@@ -204,5 +204,27 @@ for (uint i=1; i<=ones; i++)
 play("1b");
 wait(700/pitchmod);
 }
+}
+}
+class bopit_extreme_uk:bopit_extreme
+{
+bopit_extreme_uk(string name)
+{
+super(name);
+soundpath="sounds/extreme_uk";
+highscore=sd["highscore",0];
+speeds={120,111,107, 97, 85};
+speed_interval=25;
+default_timeout=150;
+timeout=150;
+add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "4", "4b", "4c", "5", "5b", "5c", "losesolo", "ouch", "fail150", "passit", "tone1", "tone2", "tone3", "tone4", "out", "win", "score", "hsv", "hs", "vb", "bb", "solo"});
+b.add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "4", "4b", "4c", "5", "5b", "5c", "drumkick", "drumkickshort", "drumkickbell", "drumsnare", "passit", "tone1", "tone2", "tone3", "tone4"});
+add_beats();
+add_command(command(1,KEY_DOWN));
+add_command(command(2,KEY_LEFT));
+add_command(command(3,KEY_RIGHT));
+add_command(command(4,KEY_RETURN));
+add_command(command(5,KEY_UP));
+
 }
 }
