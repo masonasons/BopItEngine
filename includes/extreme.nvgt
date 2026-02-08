@@ -1,14 +1,15 @@
 class bopit_extreme:bopit
 {
+int highscore=0;
 bopit_extreme()
 {
 soundpath="sounds/extreme";
 bopit();
 speeds={110,101,97, 87, 84};
 speed_interval=25;
-default_timeout=300;
-timeout=300;
-add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "4", "4b", "4c", "5", "5b", "5c", "losesolo", "ouch", "fail150", "passit", "tone1", "tone2", "tone3", "tone4", "out", "win", "score", "vb", "bb", "solo"});
+default_timeout=150;
+timeout=150;
+add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "4", "4b", "4c", "5", "5b", "5c", "losesolo", "ouch", "fail150", "passit", "tone1", "tone2", "tone3", "tone4", "out", "win", "score", "hsv", "hs", "vb", "bb", "solo"});
 b.add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "4", "4b", "4c", "5", "5b", "5c", "drumkick", "drumkickshort", "drumkickbell", "drumsnare", "passit", "tone1", "tone2", "tone3", "tone4"});
 add_beats();
 add_command(command(1,KEY_DOWN));
@@ -134,7 +135,9 @@ play("solo",hard_wait=true);
 }
 if (commands[i].name==3 and key_pressed(commands[i].key) and power and mode==3)
 {
-play_score();
+play("hsv",hard_wait=true);
+wait(150);
+play_score(highscore);
 }
 if (commands[i].name==1 and key_pressed(commands[i].key) and power)
 {
@@ -154,22 +157,34 @@ play("ouch",hard_wait=true);
 }
 if ((mode==3 or mode==4) and score<150)
 {
+if(score>highscore) {
+play("hs",hard_wait=true);
+wait(50);
+}
 play("losesolo",hard_wait=true);
+wait(50);
 }
 if((mode==3 or mode==4) and score>0) {
+if(score>highscore) {
+highscore=score;
+play("hsv",hard_wait=true);
+}
+else {
 play("score",hard_wait=true);
-play_score();
+}
+wait(150);
+play_score(score);
 }
 }
-void play_score()
+void play_score(int value)
 {
-int hundreds=floor(score/100);
-int tens=floor(score/10);
+int hundreds=floor(value/100);
+int tens=floor(value/10);
 if (tens>=20)
 tens-=20;
 if (tens>=10)
 tens-=10;
-int ones=score-(hundreds*100)-(tens*10);
+int ones=value-(hundreds*100)-(tens*10);
 for (uint i=1; i<=hundreds; i++)
 {
 play("2b");
