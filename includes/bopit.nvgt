@@ -18,6 +18,9 @@ bool save;
 string name;
 int min_pass_interval=5;
 int max_pass_interval=15;
+int pass_interval=0;
+int min_speed_interval=4;
+int max_speed_interval=4;
 bool beatbop=false;
 bool power=false;
 bool passit=false;
@@ -240,6 +243,9 @@ void start_game()
 b.play("start");
 if (passit==false)
 score=0;
+else
+set_pass_interval();
+set_speed_interval();
 in_game=true;
 }
 void new_command()
@@ -282,12 +288,21 @@ void set_autopilottime()
 {
 autopilottime=(random(650,800)/autopilotlevel)/pitchmod;
 }
+void set_pass_interval()
+{
+pass_interval=random(min_pass_interval,max_pass_interval);
+}
+void set_speed_interval()
+{
+speed_interval=random(min_speed_interval,max_speed_interval);
+}
 void handle_speedup()
 {
 speedup++;
 if (speedup>=speed_interval)
 {
 speedup=0;
+set_speed_interval();
 if (speed_index<speeds.length()-1)
 {
 speed_index++;
