@@ -102,7 +102,6 @@ void game_loop()
 {
 if (!b.playing and @current_command==null)
 {
-if (score>0)
 handle_speedup();
 new_command();
 play_command();
@@ -240,6 +239,7 @@ b.play(current_command.name+(beatbop==true?"c":"")+"command");
 }
 void start_game()
 {
+speedup=-1;
 b.play("start");
 if (passit==false)
 score=0;
