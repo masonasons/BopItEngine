@@ -29,6 +29,7 @@ int timeout;
 int default_timeout;
 int mode=0;
 int score=0;
+int working_score=0;
 int high_score=0;
 bool playing_sound=false;
 bool in_game=false;
@@ -107,14 +108,14 @@ new_command();
 play_command();
 if (command_loop())
 {
-if (passit==false)
-score++;
+working_score++;
 b.stop();
 b.play(current_command.name+"bcommand");
 @current_command=null;
-if (score>=max_score)
+if (working_score>=max_score)
 {
 win();
+score=working_score;
 in_game=false;
 }
 if (passit)
@@ -239,11 +240,11 @@ b.play(current_command.name+(beatbop==true?"c":"")+"command");
 }
 void start_game()
 {
-speedup=-1;
 b.play("start");
-if (passit==false)
+working_score=0;
+if (!passit)
 score=0;
-else
+if (passit)
 set_pass_interval();
 set_speed_interval();
 in_game=true;
@@ -258,6 +259,8 @@ return speeds[speed_index];
 }
 void lose()
 {
+if (!passit)
+score=working_score;
 timeout=default_timeout;
 speedup=0;
 speed_index=0;
