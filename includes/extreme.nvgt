@@ -224,7 +224,7 @@ super(name,"sounds/extreme_uk");
 }
 void set_speeds()
 {
-speeds={120,111,107, 97, 85};
+speeds={115,107,100, 92, 85};
 speed_interval=25;
 }
 }
