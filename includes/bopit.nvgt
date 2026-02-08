@@ -59,14 +59,19 @@ if (in_game==false)
 wait_loop();
 else
 game_loop();
+if (key_pressed(KEY_0))
+{
+pitchmod=1;
+speak(100);
+}
 if (key_repeating(KEY_DASH))
 {
-pitchmod-=0.01;
+pitchmod-=key_down(KEY_LMENU) or key_down(KEY_RMENU)?0.11:0.01;
 speak(round(100*pitchmod,0));
 }
 if (key_repeating(KEY_EQUALS))
 {
-pitchmod+=0.01;
+pitchmod+=key_down(KEY_LMENU) or key_down(KEY_RMENU)?0.1:0.01;
 speak(round(100*pitchmod,0));
 }
 }
