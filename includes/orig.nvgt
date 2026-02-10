@@ -21,7 +21,7 @@ add_command(command(3,KEY_RIGHT));
 }
 void set_speeds()
 {
-speeds={103,97,92, 87, 82};
+speeds.insert_last({103,97,92, 87, 82});
 min_speed_interval=3;
 max_speed_interval=15;
 }

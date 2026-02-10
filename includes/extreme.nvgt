@@ -28,7 +28,7 @@ add_command(command(5,KEY_UP));
 }
 void set_speeds()
 {
-speeds={110,101,97, 87, 84};
+speeds.insert_last({110,101,97, 87, 84});
 speed_interval=25;
 }
 void add_beats()
@@ -225,7 +225,7 @@ super(name,"sounds/extreme_uk");
 }
 void set_speeds()
 {
-speeds={115,107,100, 92, 85};
+speeds.insert_last({115,107,100, 92, 85});
 min_speed_interval=25;
 max_speed_interval=25;
 }

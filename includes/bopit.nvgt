@@ -10,6 +10,7 @@ this.key=key;
 }
 class bopit
 {
+int current_beat=0;
 bool autopilot=false;
 int autopilotlevel=1;
 int autopilottime;
@@ -33,7 +34,7 @@ int working_score=0;
 int high_score=0;
 bool playing_sound=false;
 bool in_game=false;
-int[] speeds;
+int[][] speeds;
 int speed_index=0;
 int speedup=0;
 int speed_interval;
@@ -255,7 +256,7 @@ void new_command()
 }
 int get_speed() property
 {
-return speeds[speed_index];
+return speeds[current_beat][speed_index];
 }
 void lose()
 {
@@ -289,7 +290,7 @@ sd.save();
 }
 void set_autopilottime()
 {
-autopilottime=((speeds[speed_index]+random(-10,10))*8/autopilotlevel)/pitchmod;
+autopilottime=((speeds[current_beat][speed_index]+random(-10,10))*8/autopilotlevel)/pitchmod;
 }
 void set_pass_interval()
 {
