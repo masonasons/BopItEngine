@@ -124,11 +124,7 @@ if (passit)
 pass++;
 if (pass>=random(min_pass_interval,max_pass_interval))
 {
-pass=0;
-wait_for_beat();
-b.play("passit");
-wait_for_beat();
-b.play("start");
+handle_passit();
 }
 }
 else
@@ -316,6 +312,14 @@ if (timeout<=40)
 timeout=40;
 }
 }
+}
+void handle_passit()
+{
+pass=0;
+wait_for_beat();
+b.play("passit");
+wait_for_beat();
+b.play("start");
 }
 void play_response()
 {

@@ -22,6 +22,16 @@ for(uint i=0; i<drumsounds.length(); i++) {
 drumsounds[i]=drumsounds[i].slice(0,drumsounds[i].find_last(".flac"));
 }
 b.add_sounds(drumsounds);
+string[] passtones1=find_files("sounds/extreme2/pass1*.flac");
+for(uint i=0; i<passtones1.length(); i++) {
+passtones1[i]=passtones1[i].slice(0,passtones1[i].find_last(".flac"));
+}
+b.add_sounds(passtones1);
+string[] passtones2=find_files("sounds/extreme2/pass1*.flac");
+for(uint i=0; i<passtones2.length(); i++) {
+passtones2[i]=passtones2[i].slice(0,passtones2[i].find_last(".flac"));
+}
+b.add_sounds(passtones2);
 }
 void add_commands()
 {
@@ -180,7 +190,7 @@ b.add("3command2","3:3
 beat2snare2:2
 beat2kick2:2");
 b.add("3bcommand2","3b:3
-beat2kick4:1
+beat2kick:1
 beat2snare3:2
 beat2kick:2");
 b.add("3ccommand2","3c:1
@@ -564,5 +574,13 @@ if (passit)
 set_pass_interval();
 set_speed_interval();
 in_game=true;
+}
+void handle_passit()
+{
+pass=0;
+wait_for_beat();
+b.play("passit"+(current_beat+1));
+wait_for_beat();
+b.play("start"+(current_beat+1));
 }
 }
