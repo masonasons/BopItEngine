@@ -1,6 +1,7 @@
 #include"speech.nvgt"
 #pragma asset "sounds"
 #include"menu.nvgt"
+#include "number_speaker.nvgt"
 #include"includes/*.nvgt"
 int bopit_index=0;
 bopit@[] bopits(0);
@@ -10,6 +11,7 @@ show_window("Bop It Engine");
 add_bopit(bopit_original("original"));
 add_bopit(bopit_extreme("extreme"));
 add_bopit(bopit_extreme_uk("extreme uk version"));
+add_bopit(bopit_extreme2("extreme2"));
 bopit@ b=bopits[bopit_index];
 show_window("Bop It Engine: "+b.name);
 while(true)
