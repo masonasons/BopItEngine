@@ -21,7 +21,7 @@ add_command(command(3,KEY_RIGHT));
 }
 void set_speeds()
 {
-speeds.insert_last({103,97,92, 87, 82});
+speeds.insert_last({106,101,95,90,85});
 min_speed_interval=3;
 max_speed_interval=15;
 }
@@ -37,41 +37,41 @@ drumsnare:4
 drumkick:2
 drumkick:2
 drumsnare:2
-drumkick2:2");
-b.add("1command","1:4
-drumsnare:2
+drumkick2:2:30");
+b.add("1command","1:4:-70
+drumsnare:2:20
 drumkick2:2");
 b.add("1bcommand","1b:4
 drumsnare:2
+drumkick2:2:30");
+b.add("1ccommand","1c:4:-70
+drumsnare:2:20
 drumkick2:2");
-b.add("1ccommand","1c:4
-drumsnare:2
-drumkick2:2");
-b.add("2command","2:4
-drumsnare:2
+b.add("2command","2:4:-70
+drumsnare:2:20
 drumkick2:2");
 b.add("2bcommand","2b:4
 drumsnare:2
+drumkick2:2:30");
+b.add("2ccommand","2c:4:-70
+drumsnare:2:20
 drumkick2:2");
-b.add("2ccommand","2c:4
-drumsnare:2
-drumkick2:2");
-b.add("3command","3:4
-drumsnare:2
+b.add("3command","3:4:-70
+drumsnare:2:20
 drumkick2:2");
 b.add("3bcommand","3b:4
 drumsnare:2
+drumkick2:2:30");
+b.add("3ccommand","3c:4:-70
+drumsnare:2:20
 drumkick2:2");
-b.add("3ccommand","3c:4
-drumsnare:2
-drumkick2:2");
-b.add("passit","passit:4
+b.add("passit","passit:4:80
 tone1:2
 tone2:2
 tone3:2
 tone2:2
 tone1:2
-tone4:2");
+tone4:2:80");
 }
 void wait_loop()
 {
@@ -147,17 +147,17 @@ int ones=score-(hundreds*100)-(tens*10);
 for (uint i=1; i<=hundreds; i++)
 {
 play("2b");
-wait(550/pitchmod);
+wait(600/pitchmod);
 }
 for (uint i=1; i<=tens; i++)
 {
 play("3b");
-wait(550/pitchmod);
+wait(600/pitchmod);
 }
 for (uint i=1; i<=ones; i++)
 {
 play("1c");
-wait(550/pitchmod);
+wait(600/pitchmod);
 }
 }
 }
