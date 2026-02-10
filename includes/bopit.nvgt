@@ -112,8 +112,7 @@ play_command();
 if (command_loop())
 {
 working_score++;
-b.stop();
-b.play(current_command.name+"bcommand");
+play_response();
 @current_command=null;
 if (working_score>=max_score)
 {
@@ -317,5 +316,10 @@ if (timeout<=40)
 timeout=40;
 }
 }
+}
+void play_response()
+{
+b.stop();
+b.play(current_command.name+"bcommand");
 }
 }

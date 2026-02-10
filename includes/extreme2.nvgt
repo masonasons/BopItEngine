@@ -547,6 +547,11 @@ void play_command()
 {
 b.play(current_command.name+(beatbop==true?"c":"")+"command"+current_beat);
 }
+void play_response()
+{
+b.stop();
+b.play(current_command.name+"bcommand"+current_beat);
+}
 void start_game()
 {
 b.play("start"+current_beat);
