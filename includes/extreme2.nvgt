@@ -87,8 +87,8 @@ beat4snare2:1
 beat4kicksnare:1
 beat4snare2:1
 beat4kicksnare:3");
-b.add("1command1","1:1
-beat1snare:1
+b.add("1command1","1:3
+beat1snare2:1
 beat1kick4:1
 beat1kick5:1
 beat1perc3:1");
@@ -97,12 +97,12 @@ beat1snare2:2
 beat1hat2:1
 beat1perc2:1");
 b.add("1ccommand1","1c:1
-beat1snare:1
+beat1snare2:1
 beat1kick4:1
 beat1kick5:1
 beat1perc3:1");
-b.add("2command1","2:1
-beat1snare:1
+b.add("2command1","2:3
+beat1snare2:1
 beat1kick4:1
 beat1kick5:1
 beat1perc3:1");
@@ -111,26 +111,27 @@ beat1snare2:2
 beat1hat2:1
 beat1perc2:1");
 b.add("2ccommand1","2c:1
-beat1snare:1
+beat1snare2:1
 beat1kick4:1
 beat1kick5:1
 beat1perc3:1");
-b.add("3command1","3:1
-beat1snare:1
+b.add("3command1","3:3
+beat1snare2:1
 beat1kick4:1
 beat1kick5:1
 beat1perc3:1");
-b.add("3bcommand1","3b:4
+b.add("3bcommand1","3b:3
+beat1hat:1
 beat1snare2:2
 beat1hat2:1
 beat1perc2:1");
 b.add("3ccommand1","3c:1
-beat1snare:1
+beat1snare2:1
 beat1kick4:1
 beat1kick5:1
 beat1perc3:1");
-b.add("4command1","4:1
-beat1snare:1
+b.add("4command1","4:3
+beat1snare2:1
 beat1kick4:1
 beat1kick5:1
 beat1perc3:1");
@@ -139,12 +140,12 @@ beat1snare2:2
 beat1hat2:1
 beat1perc2:1");
 b.add("4ccommand1","4c:1
-beat1snare:1
+beat1snare2:1
 beat1kick4:1
 beat1kick5:1
 beat1perc3:1");
-b.add("5command1","5:1
-beat1snare:1
+b.add("5command1","5:3
+beat1snare2:1
 beat1kick4:1
 beat1kick5:1
 beat1perc3:1");
@@ -153,11 +154,11 @@ beat1snare2:2
 beat1hat2:1
 beat1perc2:1");
 b.add("5ccommand1","5c:1
-beat1snare:1
+beat1snare2:1
 beat1kick4:1
 beat1kick5:1
 beat1perc3:1");
-b.add("1command2","1:1
+b.add("1command2","1:3
 beat2snare2:2
 beat2kick2:2");
 b.add("1bcommand2","1b:4
@@ -166,7 +167,7 @@ beat2kick:2");
 b.add("1ccommand2","1c:1
 beat2snare2:2
 beat2kick2:2");
-b.add("2command2","2:1
+b.add("2command2","2:3
 beat2snare2:2
 beat2kick2:2");
 b.add("2bcommand2","2b:4
@@ -175,17 +176,17 @@ beat2kick:2");
 b.add("2ccommand2","2c:1
 beat2snare2:2
 beat2kick2:2");
-b.add("3command2","3:1
+b.add("3command2","3:3
 beat2snare2:2
 beat2kick2:2");
 b.add("3bcommand2","3b:3
-beat2kick:1
+beat2kick4:1
 beat2snare3:2
 beat2kick:2");
 b.add("3ccommand2","3c:1
 beat2snare2:2
 beat2kick2:2");
-b.add("4command2","4:1
+b.add("4command2","4:3
 beat2snare2:2
 beat2kick2:2");
 b.add("4bcommand2","4b:4
@@ -194,7 +195,7 @@ beat2kick:2");
 b.add("4ccommand2","4c:1
 beat2snare2:2
 beat2kick2:2");
-b.add("5command2","5:1
+b.add("5command2","5:3
 beat2snare2:2
 beat2kick2:2");
 b.add("5bcommand2","5b:4
@@ -203,7 +204,7 @@ beat2kick:2");
 b.add("5ccommand2","5c:1
 beat2snare2:2
 beat2kick2:2");
-b.add("1command3","1:1
+b.add("1command3","1:3
 beat3kick2:1
 beat3hatc:1
 beat3percbell2:1
@@ -218,7 +219,7 @@ beat3kick2:1
 beat3hatc:1
 beat3percbell2:1
 beat3kick3:1");
-b.add("2command3","2:1
+b.add("2command3","2:3
 beat3kick2:1
 beat3hatc:1
 beat3percbell2:1
@@ -233,7 +234,7 @@ beat3kick2:1
 beat3hatc:1
 beat3percbell2:1
 beat3kick3:1");
-b.add("3command3","3:1
+b.add("3command3","3:3
 beat3kick2:1
 beat3hatc:1
 beat3percbell2:1
@@ -248,7 +249,7 @@ beat3kick2:1
 beat3hatc:1
 beat3percbell2:1
 beat3kick3:1");
-b.add("4command3","4:1
+b.add("4command3","4:3
 beat3kick2:1
 beat3hatc:1
 beat3percbell2:1
@@ -263,7 +264,7 @@ beat3kick2:1
 beat3hatc:1
 beat3percbell2:1
 beat3kick3:1");
-b.add("5command3","5:1
+b.add("5command3","5:3
 beat3kick2:1
 beat3hatc:1
 beat3percbell2:1
@@ -278,7 +279,7 @@ beat3kick2:1
 beat3hatc:1
 beat3percbell2:1
 beat3kick3:1");
-b.add("1command4","1:1
+b.add("1command4","1:3
 beat4clap:2
 beat4kick:1
 beat4hat:1");
@@ -290,7 +291,7 @@ b.add("1ccommand4","1c:1
 beat4clap:2
 beat4kick:1
 beat4hat:1");
-b.add("2command4","2:1
+b.add("2command4","2:3
 beat4kick:2
 beat4kick:1
 beat4hat:1");
@@ -302,7 +303,7 @@ b.add("2ccommand4","2c:1
 beat4kick:2
 beat4kick:1
 beat4hat:1");
-b.add("3command4","3:1
+b.add("3command4","3:3
 beat4clap:2
 beat4kick:1
 beat4hat:1");
@@ -314,7 +315,7 @@ b.add("3ccommand4","3c:1
 beat4clap:2
 beat4kick:1
 beat4hat:1");
-b.add("4command4","4:1
+b.add("4command4","4:3
 beat4clap:2
 beat4kick:1
 beat4hat:1");
@@ -326,7 +327,7 @@ b.add("4ccommand4","4c:1
 beat4clap:2
 beat4kick:1
 beat4hat:1");
-b.add("5command4","5:1
+b.add("5command4","5:3
 beat4kick:2
 beat4kick:1
 beat4hat:1");
@@ -375,46 +376,46 @@ pass2_2:2
 pass2_1:2
 pass2_4:2");
 b.add("losesolo1","beat1kick:1
-beat1snare1:1
+beat1snare2:1
 beat1kick:1
 beat1kick:1
-beat1snare2:2
+beat1snare:2
 beat1hat2:2
-beat1kick:1
-beat1snare1:1
-beat1kick:1
-beat1kick:1
-beat1snare2:2
-1b:2");
-b.add("losesolo1_alt","beat1kick:1
-beat1snare1:1
-beat1kick:1
-beat1kick:1
-beat1snare2:2
-beat1hat2:2
-beat1kick:1
-beat1snare1:1
-beat1kick:1
 beat1kick:1
 beat1snare2:1
+beat1kick:1
+beat1kick:1
+beat1snare:2
+1b:2");
+b.add("losesolo1_alt","beat1kick:1
+beat1snare2:1
+beat1kick:1
+beat1kick:1
+beat1snare:2
+beat1hat2:2
+beat1kick:1
+beat1snare2:1
+beat1kick:1
+beat1kick:1
+beat1snare:1
 1b:2");
 b.add("losesolo2","beat2kick2:2
 beat2kick:1
 beat2kick3:1
 beat2snare2:2
 1b:3
-beat2kick3:1
+beat2kick4:1
 beat2kick:1
 beat2kick3:1
 beat2snare2:2
 1b:3");
 b.add("losesolo3","beat3percbell2:1
 beat3bongo2:1
-beat3bongobell:1
+beat3hatbell:1
 beat3bongo:1
 beat3percbell2:1
 beat3bongo2:1
-beat3bongobell:1
+beat3hatbell:1
 beat3bongo:1
 pass2_3:2
 pass2_3:2
@@ -431,6 +432,7 @@ beat4snare:1
 beat4snare:1
 beat4snare:1
 beat4snare2:2
+beat4clap:2
 1b:2");
 }
 void wait_loop()
@@ -449,10 +451,10 @@ mode++;
 if (mode>2)
 mode=1;
 if(beatbop) {
-play("vb",hard_wait=true);
+play("bb",hard_wait=true);
 }
 else{
-play("bb",hard_wait=true);
+play("vb",hard_wait=true);
 }
 if (mode==1)
 {
@@ -476,7 +478,7 @@ beatbop=true;
 play("bb",hard_wait=true);
 }
 }
-if (commands[i].name==3 and key_pressed(commands[i].key) and power and (mode==3 or mode==4))
+if (commands[i].name==3 and key_pressed(commands[i].key) and power and mode==1)
 {
 play("hs",hard_wait=true);
 wait(150/pitchmod);
@@ -484,7 +486,7 @@ play_score(highscore);
 }
 if (commands[i].name==1 and key_pressed(commands[i].key) and power)
 {
-current_beat=1;
+current_beat=0;
 start_game();
 return;
 }
@@ -493,11 +495,11 @@ return;
 void lose()
 {
 bopit::lose();
-if(!(score>=150)) {
+if(score<150 or mode!=1) {
 play("ouch",hard_wait=true);
 }
 if(mode==1) {
-b.play("losesolo"+current_beat);
+b.play("losesolo"+(current_beat+1));
 wait_for_beat();
 wait(50/pitchmod);
 }
@@ -530,31 +532,31 @@ if (speedup>=speed_interval)
 {
 speedup=0;
 set_speed_interval();
-if(current_beat<4) current_beat++;
-if (speed_index<speeds[3].length()-1 and current_beat>4)
+current_beat++;
+if (speed_index<speeds[3].length()-1 and current_beat>=4)
 {
 speed_index++;
 timeout-=40;
 if (timeout<=40)
 timeout=40;
-current_beat=1;
+current_beat=0;
 }
-b.play("start"+current_beat);
+b.play("start"+(current_beat+1));
 wait_for_beat();
 }
 }
 void play_command()
 {
-b.play(current_command.name+(beatbop==true?"c":"")+"command"+current_beat);
+b.play(current_command.name+(beatbop==true?"c":"")+"command"+(current_beat+1));
 }
 void play_response()
 {
 b.stop();
-b.play(current_command.name+"bcommand"+current_beat);
+b.play(current_command.name+"bcommand"+(current_beat+1));
 }
 void start_game()
 {
-b.play("start"+current_beat);
+b.play("start"+(current_beat+1));
 working_score=0;
 if (!passit)
 score=0;
