@@ -89,9 +89,11 @@ if (key_pressed(KEY_0))
 pitchmod=1;
 speak(100);
 }
-if (key_repeating(KEY_DASH))
+if (key_repeating(KEY_DASH) and pitchmod>0.05)
 {
 pitchmod-=key_down(KEY_LMENU) or key_down(KEY_RMENU)?0.1:0.01;
+if (pitchmod<0.05)
+pitchmod=0.05;
 speak(round(100*pitchmod,0));
 }
 if (key_repeating(KEY_EQUALS))
@@ -307,7 +309,7 @@ if (speedup>=speed_interval)
 {
 speedup=0;
 set_speed_interval();
-if (speed_index<speeds.length()-1)
+if (speed_index<speeds[current_beat].length()-1)
 {
 speed_index++;
 timeout-=40;
