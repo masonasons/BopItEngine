@@ -28,8 +28,9 @@ add_command(command(5,KEY_UP));
 }
 void set_speeds()
 {
-speeds.insert_last({110,101,97, 87, 84});
-speed_interval=25;
+speeds.insert_last({115,107,100, 92, 85});
+min_speed_interval=8;
+max_speed_interval=20;
 }
 void add_beats()
 {
@@ -58,6 +59,9 @@ b.add("2bcommand","2b:4
 drumsnare:2
 drumkickshort:1
 drumkickshort:1");
+b.add("2bcommand_alt","2b:4
+drumsnare:2
+drumkickshort:1:30");
 b.add("2ccommand","2c:4
 drumsnare:2
 drumkickshort:1
@@ -158,6 +162,16 @@ return;
 }
 }
 }
+void play_response()
+{
+b.stop();
+if(speed_index==3 and current_command.name==2) {
+b.play(current_command.name+"bcommand_alt");
+}
+else {
+b.play(current_command.name+"bcommand");
+}
+}
 void lose()
 {
 bopit::lose();
@@ -226,7 +240,7 @@ super(name,"sounds/extreme_uk");
 void set_speeds()
 {
 speeds.insert_last({115,107,100, 92, 85});
-min_speed_interval=25;
-max_speed_interval=25;
+min_speed_interval=8;
+max_speed_interval=20;
 }
 }
