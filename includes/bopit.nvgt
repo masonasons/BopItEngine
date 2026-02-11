@@ -141,6 +141,7 @@ while (b.playing)
 {
 wait(5);
 b.loop();
+sound_loop();
 }
 }
 void wait_loop()
