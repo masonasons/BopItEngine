@@ -228,7 +228,7 @@ if (!hard_wait)
 h.play();
 else
 h.play_wait();
-if (wait)
+if (wait and !hard_wait)
 playing_sound=true;
 }
 }
