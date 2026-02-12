@@ -45,7 +45,7 @@ bopit_index=0;
 b.play("1");
 show_window("Bop It Engine: "+b.name);
 }
-if (key_pressed(KEY_ESCAPE))
+if (key_pressed(KEY_ESCAPE) or key_pressed(KEY_AC_BACK))
 exit();
 }
 }
