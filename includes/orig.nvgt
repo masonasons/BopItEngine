@@ -21,7 +21,7 @@ add_command(command(3,KEY_RIGHT));
 }
 void set_speeds()
 {
-speeds.insert_last({106,101,95,90,85});
+speeds.insert_last({106,101,93,85,70});
 min_speed_interval=3;
 max_speed_interval=15;
 }
@@ -92,25 +92,27 @@ if (mode==1)
 {
 beatbop=false;
 passit=true;
-play("1b");
+play("1b",hard_wait=true);
 }
 else if (mode==2)
 {
 beatbop=true;
 passit=true;
-play("3b");
+play("3b",hard_wait=true);
 }
 else if (mode==3)
 {
 beatbop=false;
 passit=false;
-play("2b");
+play("2b",hard_wait=true);
 }
-wait(260/pitchmod);
 }
 if (commands[i].name==3 and key_pressed(commands[i].key) and power and mode==3)
 {
-play_score();
+if(score<max_score) play_score();
+else {
+play("win",hard_wait=true);
+}
 }
 if (commands[i].name==1 and key_pressed(commands[i].key) and power)
 {
@@ -130,10 +132,20 @@ wait(1000/pitchmod);
 play_score();
 }
 }
+void check_win()
+{
+if (working_score>=max_score and mode==3)
+{
+win();
+score=working_score;
+in_game=false;
+}
+}
 void win()
 {
 wait_for_beat();
 play("win",hard_wait=true);
+speed_index=0;
 }
 void play_score()
 {
@@ -159,6 +171,9 @@ for (uint i=1; i<=ones; i++)
 play("1c");
 wait(575/pitchmod);
 }
+if(score>=100) {
+play("win",hard_wait=true);
+}
 }
 }
 class bopit_original2000:bopit_original
@@ -173,6 +188,7 @@ max_pass_interval=7;
 add_sounds();
 add_beats();
 set_speeds();
+max_score=200;
 }
 void add_beats()
 {

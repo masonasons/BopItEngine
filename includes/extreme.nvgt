@@ -15,7 +15,7 @@ add_beats();
 }
 void add_sounds()
 {
-add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "4", "4b", "4c", "5", "5b", "5c", "losesolo", "ouch", "fail150", "passit", "tone1", "tone2", "tone3", "tone4", "out", "win", "score", "hsv", "hs", "vb", "bb", "solo"});
+add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "4", "4b", "4c", "5", "5b", "5c", "losesolo", "ouch", "fail150", "passit", "tone1", "tone2", "tone3", "tone4", "out", "win", "score", "hsv", "hsjingle1", "hsjingle2", "vb", "bb", "solo", "bad1", "bad2", "bad3", "bad4", "bad5", "bad6", "good1", "good2",});
 b.add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "4", "4b", "4c", "5", "5b", "5c", "drumkick", "drumkickshort", "drumkickbell", "drumsnare", "passit", "tone1", "tone2", "tone3", "tone4"});
 }
 void add_commands()
@@ -174,6 +174,7 @@ b.play(current_command.name+"bcommand");
 }
 void lose()
 {
+int give_comment=random(1,20);
 bopit::lose();
 if((mode==3 or mode==4) and score>=150) {
 play("fail150",hard_wait=true);
@@ -184,11 +185,19 @@ play("ouch",hard_wait=true);
 if ((mode==3 or mode==4) and score<150)
 {
 if(score>highscore) {
-play("hs",hard_wait=true);
+play("hsjingle1",hard_wait=true);
+wait(50/pitchmod);
+if(give_comment>5) {
+play("good"+random(1,2),hard_wait=true);
+}
+play("hsjingle2",hard_wait=true);
 wait(50/pitchmod);
 }
 play("losesolo",hard_wait=true);
 wait(50/pitchmod);
+if(score<highscore and give_comment>5) {
+play("bad"+random(1,6),hard_wait=true);
+}
 }
 if((mode==3 or mode==4) and score>0) {
 if(score>highscore) {
@@ -197,12 +206,21 @@ highscore=score;
 save_value("highscore",highscore);
 }
 play("hsv",hard_wait=true);
+wait(150);
 }
 else {
 play("score",hard_wait=true);
+wait(50);
 }
-wait(150);
 play_score(score);
+}
+else if(mode==1 or mode==2) {
+if(give_comment>5) {
+wait(50);
+play("good"+random(1,2),hard_wait=true);
+}
+wait(50);
+play("out",hard_wait=true);
 }
 }
 void play_score(int value)
@@ -230,6 +248,28 @@ play("1b");
 wait(700/pitchmod);
 }
 }
+void check_win()
+{
+if (working_score>=max_score and (mode==3 or mode==4))
+{
+win();
+score=working_score;
+in_game=false;
+}
+}
+void win()
+{
+wait_for_beat();
+play("win",hard_wait=true);
+highscore=score;
+save_value("highscore",highscore);
+play("hsv",hard_wait=true);
+play_score(200);
+wait(500);
+play_score(50);
+speed_index=0;
+}
+
 }
 class bopit_extreme_uk:bopit_extreme
 {

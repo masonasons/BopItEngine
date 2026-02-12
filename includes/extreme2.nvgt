@@ -15,7 +15,7 @@ add_beats();
 }
 void add_sounds()
 {
-add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "4", "4b", "4c", "5", "5b", "5c", "ouch", "passit", "out", "score", "hs", "vb", "bb", "solo"});
+add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "4", "4b", "4c", "5", "5b", "5c", "ouch", "passit", "out", "score", "hs", "vb", "bb", "solo", "bad1", "bad2", "bad3", "bad4", "bad5", "bad6", "bad7", "good1", "good2", "good3"});
 b.add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "4", "4b", "4c", "5", "5b", "5c", "passit", "pass2_1", "pass2_2", "pass2_3", "pass2_4"});
 string[] drumsounds=find_files("sounds/extreme2/beat*.flac");
 for(uint i=0; i<drumsounds.length(); i++) {
@@ -504,6 +504,7 @@ return;
 }
 void lose()
 {
+int give_comment=random(1,20);
 bopit::lose();
 if(score<150 or mode!=1) {
 play("ouch",hard_wait=true);
@@ -513,19 +514,28 @@ b.play("losesolo"+(current_beat+1));
 wait_for_beat();
 wait(50/pitchmod);
 }
+if(give_comment>5) {
+if(mode==1 and score>highscore) {
+play("good"+random(1,3),hard_wait=true);
+}
+else {
+play("bad"+random(1,7),hard_wait=true);
+}
+}
 if(mode==1 and score>0) {
 if(score>highscore) {
-{
 highscore=score;
 save_value("highscore",highscore);
-}
 play("hs",hard_wait=true);
+wait(50/pitchmod);
 }
 else {
 play("score",hard_wait=true);
 }
-wait(50/pitchmod);
 play_score(score);
+}
+else if(mode==2) {
+play("out",hard_wait=true);
 }
 }
 void play_score(int value)
@@ -582,5 +592,24 @@ wait_for_beat();
 b.play("passit"+(current_beat+1));
 wait_for_beat();
 b.play("start"+(current_beat+1));
+}
+void check_win()
+{
+if (working_score>=max_score and mode==1)
+{
+win();
+score=working_score;
+in_game=false;
+}
+}
+void win() {
+wait_for_beat();
+b.play("losesolo4");
+wait_for_beat();
+highscore=score;
+save_value("highscore",highscore);
+play("hs", hard_wait=true);
+wait(100);
+play_score(250);
 }
 }
