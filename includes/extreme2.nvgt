@@ -43,7 +43,7 @@ add_command(command(5,KEY_UP));
 }
 void set_speeds()
 {
-speeds.resize(4);
+speeds.resize(0);
 speeds={{121,117,114, 115, 117,90},{119,115,114,114,112,90}, {125,116,116,116,116,90}, {121,116,116,116,116,90}};
 speed_interval=16;
 min_speed_interval=16;
@@ -584,6 +584,7 @@ if (passit)
 set_pass_interval();
 set_speed_interval();
 in_game=true;
+speedup=-1;
 }
 void handle_passit()
 {
