@@ -54,11 +54,7 @@ this.name=name;
 @b=beat(@this);
 if (save)
 {
-if (OS==OS_DARWIN and !directory_exists(DIRECTORY_APPDATA+"/BopItEngine"))
-directory_create(DIRECTORY_APPDATA+"/BopItEngine");
-if (!directory_exists(OS==OS_DARWIN?DIRECTORY_APPDATA+"/BopItEngine/":""+"config"))
-directory_create(OS==OS_DARWIN?DIRECTORY_APPDATA+"/BopItEngine/":""+"config");
-@sd=savedata(OS==OS_DARWIN?DIRECTORY_APPDATA+"/BopItEngine/":""+"config/"+name+".dat");
+@sd=savedata(get_preferences_path("masonasons.me","BopItEngine")+"/"+name+".dat");
 sd.load();
 }
 }
