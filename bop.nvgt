@@ -1,5 +1,6 @@
 #include "touch.nvgt"
 #include"speech.nvgt"
+#pragma document "readme.txt"
 #pragma asset "sounds"
 #include"menu.nvgt"
 #include "number_speaker.nvgt"
