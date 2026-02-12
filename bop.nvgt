@@ -1,3 +1,4 @@
+#include "touch.nvgt"
 #include"speech.nvgt"
 #pragma asset "sounds"
 #include"menu.nvgt"
@@ -5,9 +6,24 @@
 #include"includes/*.nvgt"
 int bopit_index=0;
 bopit@[] bopits(0);
+touch_gesture_manager touch;
 void main()
 {
 show_window("Bop It Engine");
+touch_keyboard_interface touchkeys(touch, {
+{"swipe_left1f", KEY_LEFT},
+{"swipe_right1f", KEY_RIGHT},
+{"swipe_up1f", KEY_UP},
+{"single_tap1f", KEY_DOWN},
+{"single_tap2f", KEY_A},
+{"single_tap3f", KEY_S},
+{"swipe_down1f", KEY_RETURN},
+{"swipe_left2f",KEY_TAB},
+{"swipe_down2f",KEY_DASH},
+{"swipe_up2f",KEY_EQUALS},
+{"swipe_right2f",KEY_TAB}
+});
+touch.add_touch_interface(touchkeys);
 add_bopit(bopit_original("original"));
 add_bopit(bopit_original2000("original 2000"));
 add_bopit(bopit_extreme("extreme"));
@@ -19,6 +35,7 @@ while(true)
 {
 wait(5);
 b.loop();
+touch.monitor();
 if (key_pressed(KEY_TAB))
 {
 bopit_index++;

@@ -1,4 +1,7 @@
 [build]
 output_basename=BopItEngine
+product_identifier=me.masonasons.BopItEngine
+product_name=Bop It Engine
+product_version=1.0
 [scripting]
 allow_multiline_strings = true

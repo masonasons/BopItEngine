@@ -173,6 +173,7 @@ autopilottimer.restart();
 while(waittimer.elapsed<=timeout/pitchmod)
 {
 wait(5);
+touch.monitor();
 sound_loop();
 b.loop();
 if (b.playing or playing_sound)
