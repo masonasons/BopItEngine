@@ -18,20 +18,43 @@ void add_sounds()
 add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "4", "4b", "4c", "5", "5b", "5c", "ouch", "passit", "out", "score", "hs", "vb", "bb", "solo", "bad1", "bad2", "bad3", "bad4", "bad5", "bad6", "bad7", "good1", "good2", "good3"});
 b.add_sounds({"1", "1b", "1c", "2", "2b", "2c", "3", "3b", "3c", "4", "4b", "4c", "5", "5b", "5c", "passit", "pass2_1", "pass2_2", "pass2_3", "pass2_4"});
 string[] drumsounds=find_files("sounds/extreme2/beat*.flac");
-for(uint i=0; i<drumsounds.length(); i++) {
-drumsounds[i]=drumsounds[i].slice(0,drumsounds[i].find_last(".flac"));
+normalize_sound_names(drumsounds);
+if (drumsounds.length()==0)
+{
+drumsounds={
+"beat1hat", "beat1hat2", "beat1kick", "beat1kick2", "beat1kick3", "beat1kick4", "beat1kick5", "beat1kick6",
+"beat1perc", "beat1perc2", "beat1perc3", "beat1snare", "beat1snare2",
+"beat2bell", "beat2kick", "beat2kick2", "beat2kick3", "beat2kick4", "beat2snare", "beat2snare2", "beat2snare3", "beat2unknown",
+"beat3bell", "beat3bongo", "beat3bongo2", "beat3bongobell", "beat3hat", "beat3hatbell", "beat3hatc",
+"beat3kick", "beat3kick2", "beat3kick3", "beat3kick4", "beat3perc", "beat3percbell", "beat3percbell2", "beat3percbell3",
+"beat3snare", "beat3snare2",
+"beat4clap", "beat4hat", "beat4kick", "beat4kicksnare", "beat4snare", "beat4snare2", "beat_spacer"
+};
 }
 b.add_sounds(drumsounds);
 string[] passtones1=find_files("sounds/extreme2/pass1*.flac");
-for(uint i=0; i<passtones1.length(); i++) {
-passtones1[i]=passtones1[i].slice(0,passtones1[i].find_last(".flac"));
-}
+normalize_sound_names(passtones1);
+if (passtones1.length()==0)
+passtones1={"pass1_1", "pass1_2", "pass1_3", "pass1_4", "pass1_5", "pass1_6", "pass1_7", "pass1_8", "pass1_9", "pass1_10"};
 b.add_sounds(passtones1);
-string[] passtones2=find_files("sounds/extreme2/pass1*.flac");
-for(uint i=0; i<passtones2.length(); i++) {
-passtones2[i]=passtones2[i].slice(0,passtones2[i].find_last(".flac"));
-}
+string[] passtones2=find_files("sounds/extreme2/pass2*.flac");
+normalize_sound_names(passtones2);
+if (passtones2.length()==0)
+passtones2={"pass2_1", "pass2_2", "pass2_3", "pass2_4"};
 b.add_sounds(passtones2);
+}
+void normalize_sound_names(string[]@ sound_names)
+{
+for(uint i=0; i<sound_names.length(); i++)
+{
+sound_names[i]=sound_names[i].replace("\\","/");
+int slash=sound_names[i].find_last("/");
+if (slash>-1)
+sound_names[i]=sound_names[i].substr(slash+1);
+int ext=sound_names[i].find_last(".flac");
+if (ext>-1)
+sound_names[i]=sound_names[i].slice(0,ext);
+}
 }
 void add_commands()
 {

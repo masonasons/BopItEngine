@@ -71,7 +71,10 @@ if (beats.exists(name))
 {
 string b;
 beats.get(name,b);
-string[] data=b.split("\r\n",false);
+// Android builds may normalize multiline string endings to \n only.
+b=b.replace("\r\n","\n");
+b=b.replace("\r","\n");
+string[] data=b.split("\n",false);
 for (uint i=0; i<data.length(); i++)
 {
 string[] data2=data[i].split(":",true);
@@ -83,7 +86,13 @@ add_segment(beat_segment(@h,parse_int(data2[1]),0,true));
 else if (data2.length()==3)
 add_segment(beat_segment(@h,parse_int(data2[1]),parse_int(data2[2]),true));
 else if (data2.length()==4)
-add_segment(beat_segment(@h,parse_int(data2[1]),parse_int(data2[2]),data[2]=="true"?true:false));
+add_segment(beat_segment(@h,parse_int(data2[1]),parse_int(data2[2]),data2[3]=="true"?true:false));
+}
+if (segments.length()==0)
+{
+playing=false;
+index=0;
+return false;
 }
 this.index=-1;
 this.playing=true;

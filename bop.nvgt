@@ -8,10 +8,84 @@
 int bopit_index=0;
 bopit@[] bopits(0);
 touch_gesture_manager touch;
+class single_tap_touch_keyboard_interface : touch_keyboard_interface
+{
+dictionary tap_map;
+timer single_tap_guard;
+timer pending_release_timer;
+int[] pending_release_keys;
+bool has_pending_release=false;
+single_tap_touch_keyboard_interface(touch_gesture_manager@ parent, dictionary@ map, float minx = TOUCH_UNCOORDINATED, float maxx = TOUCH_UNCOORDINATED, float miny = TOUCH_UNCOORDINATED, float maxy = TOUCH_UNCOORDINATED)
+{
+super(parent, map, minx, maxx, miny, maxy);
+this.tap_map=map;
+}
+bool attempt_single_tap(uint finger_count, int[] &out key_codes)
+{
+int key;
+string keyname="single_tap"+finger_count+"f";
+if (this.tap_map.get(keyname, key))
+{
+if (simulate_key_down(key))
+{
+key_codes.insert_last(key);
+return true;
+}
+}
+int[] keys;
+if (this.tap_map.get(keyname, keys))
+{
+if (simulate_keys_down(keys))
+{
+key_codes=keys;
+return true;
+}
+}
+return false;
+}
+void queue_release(int[] &in keys)
+{
+if (has_pending_release and pending_release_keys.length()>0)
+simulate_keys_up(pending_release_keys);
+pending_release_keys=keys;
+has_pending_release=true;
+pending_release_timer.restart();
+}
+void process_pending_releases()
+{
+if (has_pending_release and pending_release_timer.elapsed>=40)
+{
+simulate_keys_up(pending_release_keys);
+pending_release_keys.resize(0);
+has_pending_release=false;
+}
+}
+void on_released_finger(touch_screen_finger@ finger)
+{
+if (@finger == null)
+return;
+if (!finger.has_swiped and single_tap_guard.elapsed>=50)
+{
+int[] keycodes;
+uint finger_count=this.parent.finger_map.get_size();
+if (finger_count<1)
+finger_count=1;
+if (attempt_single_tap(finger_count, keycodes))
+{
+finger.last_keys_pressed=keycodes;
+queue_release(keycodes);
+single_tap_guard.restart();
+return;
+}
+single_tap_guard.restart();
+}
+touch_keyboard_interface::on_released_finger(finger);
+}
+}
 void main()
 {
 show_window("Bop It Engine");
-touch_keyboard_interface touchkeys(touch, {
+single_tap_touch_keyboard_interface touchkeys(touch, {
 {"swipe_left1f", KEY_LEFT},
 {"swipe_right1f", KEY_RIGHT},
 {"swipe_up1f", KEY_UP},
@@ -37,6 +111,7 @@ while(true)
 wait(5);
 b.loop();
 touch.monitor();
+touchkeys.process_pending_releases();
 if (key_pressed(KEY_TAB))
 {
 bopit_index++;
