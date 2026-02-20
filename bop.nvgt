@@ -27,6 +27,8 @@ touch_keyboard_interface touchkeys(touch, {
 touch.add_touch_interface(touchkeys);
 add_bopit(bopit_original("original"));
 add_bopit(bopit_original2000("original 2000"));
+add_bopit(bopit_original2002("original 2002"));
+add_bopit(brats_bopit("brats bop it"));
 add_bopit(bopit_extreme("extreme"));
 add_bopit(bopit_extreme_uk("extreme uk version"));
 add_bopit(bopit_extreme2("extreme2"));

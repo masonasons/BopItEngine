@@ -206,7 +206,7 @@ highscore=score;
 save_value("highscore",highscore);
 }
 play("hsv",hard_wait=true);
-wait(150);
+wait(150/pitchmod);
 }
 else {
 play("score",hard_wait=true);
@@ -216,10 +216,10 @@ play_score(score);
 }
 else if(mode==1 or mode==2) {
 if(give_comment>5) {
-wait(50);
+wait(75/pitchmod);
 play("good"+random(1,2),hard_wait=true);
 }
-wait(50);
+wait(100/pitchmod);
 play("out",hard_wait=true);
 }
 }
