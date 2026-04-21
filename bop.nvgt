@@ -41,9 +41,18 @@ b.loop();
 touch.monitor();
 if (key_pressed(KEY_TAB))
 {
+if (key_down(KEY_LSHIFT) or key_down(KEY_RSHIFT))
+{
+bopit_index--;
+if (bopit_index<0)
+bopit_index=bopits.length()-1;
+}
+else
+{
 bopit_index++;
 if (bopit_index>=bopits.length())
 bopit_index=0;
+}
 @b=bopits[bopit_index];
 b.play("1");
 show_window("Bop It Engine: "+b.name);
