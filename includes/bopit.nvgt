@@ -268,6 +268,7 @@ timeout=default_timeout;
 speedup=0;
 speed_index=0;
 pass=0;
+@last_command=null;
 b.stop();
 }
 void win()
@@ -336,6 +337,7 @@ void check_win()
 if (working_score>=max_score)
 {
 win();
+@last_command=null;
 score=working_score;
 in_game=false;
 }
