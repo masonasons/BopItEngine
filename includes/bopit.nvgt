@@ -50,6 +50,7 @@ string soundpath;
 dictionary sounds;
 command@[] commands;
 command@ current_command;
+command@ last_command;
 timer autopilottimer, waittimer;
 savedata@ sd;
 bopit(string name, bool save=false, string soundpath="")
@@ -191,7 +192,10 @@ for (uint i=0; i<commands.length(); i++)
 if (key_pressed(commands[i].key))
 {
 if (@current_command==@commands[i] or supports_oneonone==true and current_command.name==bopit_command and (commands[i].name==bopit_command or commands[i].name==bopit_command2))
+{
+@last_command=@commands[i];
 return true;
+}
 else
 return false;
 }
