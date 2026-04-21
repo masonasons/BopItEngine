@@ -2,10 +2,12 @@ class command
 {
 string name;
 int key;
-command(string name, int key)
+bool issue=true;
+command(string name, int key, bool issue=true)
 {
 this.name=name;
 this.key=key;
+this.issue=issue;
 }
 }
 class bopit
@@ -25,6 +27,10 @@ int max_speed_interval=4;
 bool beatbop=false;
 bool power=false;
 bool passit=false;
+bool supports_oneonone=false;
+bool oneonone=false;
+string bopit_command=1;
+string bopit_command2=4;
 int pass=0;
 int timeout;
 int default_timeout;
@@ -184,7 +190,7 @@ for (uint i=0; i<commands.length(); i++)
 {
 if (key_pressed(commands[i].key))
 {
-if (@current_command==@commands[i])
+if (@current_command==@commands[i] or supports_oneonone==true and current_command.name==bopit_command and (commands[i].name==bopit_command or commands[i].name==bopit_command2))
 return true;
 else
 return false;
@@ -242,6 +248,8 @@ in_game=true;
 }
 void new_command()
 {
+@current_command=@commands[random(0,commands.length()-1)];
+while (!current_command.issue)
 @current_command=@commands[random(0,commands.length()-1)];
 }
 int get_speed() property

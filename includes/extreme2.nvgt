@@ -4,6 +4,8 @@ int highscore=0;
 bopit_extreme2(string name, string sounds="sounds/extreme2")
 {
 super(name,true,sounds);
+supports_oneonone=true;
+bopit_command2=6;
 highscore=sd["highscore",0];
 set_speeds();
 default_timeout=150;
@@ -42,6 +44,7 @@ add_command(command(2,KEY_LEFT));
 add_command(command(3,KEY_RIGHT));
 add_command(command(4,KEY_RETURN));
 add_command(command(5,KEY_UP));
+add_command(command(6,KEY_SPACE,false));
 }
 void set_speeds()
 {
