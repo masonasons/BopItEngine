@@ -9,6 +9,8 @@ set_speeds();
 default_timeout=150;
 max_score=250;
 timeout=150;
+min_pass_interval=4;
+max_pass_interval=8;
 add_sounds();
 add_commands();
 add_beats();
@@ -478,7 +480,7 @@ passit=true;
 play("passit",hard_wait=true);
 }
 }
-if (commands[i].name==5 and key_pressed(commands[i].key))
+if (commands[i].name==5 and key_pressed(commands[i].key) and power)
 {
 if(beatbop) {
 beatbop=false;
