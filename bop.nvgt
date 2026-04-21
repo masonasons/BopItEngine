@@ -11,6 +11,7 @@ touch_gesture_manager touch;
 void main()
 {
 show_window("Bop It Engine");
+int[] backcycle_touch={KEY_LSHIFT,KEY_TAB};
 touch_keyboard_interface touchkeys(touch, {
 {"swipe_left1f", KEY_LEFT},
 {"swipe_right1f", KEY_RIGHT},
@@ -19,7 +20,7 @@ touch_keyboard_interface touchkeys(touch, {
 {"single_tap2f", KEY_A},
 {"single_tap3f", KEY_S},
 {"swipe_down1f", KEY_RETURN},
-{"swipe_left2f",KEY_TAB},
+{"swipe_left2f",backcycle_touch},
 {"swipe_down2f",KEY_DASH},
 {"swipe_up2f",KEY_EQUALS},
 {"swipe_right2f",KEY_TAB}
